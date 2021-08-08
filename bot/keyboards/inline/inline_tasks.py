@@ -37,6 +37,7 @@ async def choose_task_kb(user_id: int, action: str, day: int) -> InlineKeyboardM
         if not done:
             kb.add(InlineKeyboardButton(text=task, callback_data=tasks_callback.new(name=f'{action}_task',
                                                                                     task_id=task_id)))
+    kb.add(InlineKeyboardButton(text='Отмена', callback_data='close'))
     return kb
 
 
@@ -82,4 +83,10 @@ async def settings_kb(user_id: int) -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup()
     kb.add(InlineKeyboardButton(text=btn, callback_data='change_notif')).add(InlineKeyboardButton(text='Отмена',
                                                                                                   callback_data='close'))
+    return kb
+
+
+async def cancel_kb() -> InlineKeyboardMarkup:
+    kb = InlineKeyboardMarkup()
+    kb.add(InlineKeyboardButton(text='Отмена', callback_data='close'))
     return kb

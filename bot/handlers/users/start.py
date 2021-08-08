@@ -1,4 +1,5 @@
 from aiogram import types
+from aiogram.dispatcher import FSMContext
 
 from utils.db_api import db_func as db
 
@@ -15,4 +16,9 @@ async def bot_start(message: types.Message):
 
 
 async def close_menu(call: types.CallbackQuery):
+    await call.message.edit_reply_markup()
+
+
+async def close_menu_state(call: types.CallbackQuery, state: FSMContext):
+    await state.finish()
     await call.message.edit_reply_markup()

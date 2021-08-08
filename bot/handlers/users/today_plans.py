@@ -3,7 +3,7 @@ from datetime import datetime
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
-from keyboards.inline.inline_tasks import change_tasks_kb, choose_task_kb
+from keyboards.inline.inline_tasks import change_tasks_kb, choose_task_kb, cancel_kb
 from states import states
 from utils.db_api import db_func as db
 
@@ -31,7 +31,7 @@ async def show_plans(message: types.Message):
 async def start_adding_task(call: types.CallbackQuery, callback_data: dict, state: FSMContext):
     await call.message.edit_reply_markup()
     day = callback_data.get('day')
-    await call.message.answer('Пожалуйста, введите новую задачу..')
+    await call.message.answer('Пожалуйста, введите новую задачу..', reply_markup=await cancel_kb())
     await states.Task.add_task.set()
     await state.update_data(user_id=call.from_user.id, day=day)
 
