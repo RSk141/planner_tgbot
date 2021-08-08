@@ -1,1 +1,1 @@
-Template for Telegram bot on aiogram
+Telegram bot for your plans
