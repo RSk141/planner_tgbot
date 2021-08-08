@@ -15,6 +15,7 @@ class User(db.Model):
     username = db.Column(db.Unicode())
     fullname = db.Column(db.Unicode())
     notif = db.Column(db.Boolean(), default=True)
+    language = db.Column(db.String(2), default='ru')
     created_at = Column(db.DateTime(True), server_default=db.func.now())
     updated_at = Column(db.DateTime(True),
                         default=db.func.now(),

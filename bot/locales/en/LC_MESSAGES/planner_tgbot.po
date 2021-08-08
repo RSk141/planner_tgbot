@@ -1,0 +1,286 @@
+# English translations for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-08-08 22:25+0300\n"
+"PO-Revision-Date: 2021-08-08 18:49+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: handlers/users/settings.py:12
+msgid "Выберите опцию"
+msgstr "Choose the option"
+
+#: handlers/users/settings.py:24
+msgid "Уведомления включены!"
+msgstr "Notifications was successfully turned on"
+
+#: handlers/users/settings.py:26
+msgid "Уведомления выключены!"
+msgstr "Notifications was successfully turned off"
+
+#: handlers/users/settings.py:32
+msgid "Выберите язык"
+msgstr "Choose the language"
+
+#: handlers/users/settings.py:39
+msgid "Язык успешно именен!"
+msgstr "Language was successfully changed"
+
+#: handlers/users/start.py:12
+msgid ""
+"Здраствуйте 👋 Я помогу вам упорядочить ващи дела и создать удобный список"
+" задач!\n"
+"Если возникли проблемы или вопросы, вы можете обратится в поддержку. "
+"Успехов в достижении вашей цели! 🤗"
+msgstr ""
+"Hi! 👋 I'm here to help you to manage your tasks and to create comfortable"
+" task list. If you have questions or problems,you can use the support "
+"button. Good luck to achieve your goal! 🤗"
+
+#: handlers/users/support.py:11
+msgid "Вы хотите обратится в поддержку?"
+msgstr "Do you want to write support message?"
+
+#: handlers/users/support.py:16
+msgid ""
+"👋 Напишите свои предложения, вопросы или проблему, с которой столкнулись\n"
+"Мы обязательно учтём всё и примем меры 😌"
+msgstr ""
+"👋 Write your offers, questions or problem, you came across\n"
+"We'll do as much as possible to help you 😌"
+
+#: handlers/users/support.py:25
+msgid "Ваше сообщение успешно доставлено. Ожидайте ответ от администратора!"
+msgstr "Your message was successfully sent. Expect an answer from administrator"
+
+#: handlers/users/support.py:32
+msgid "Введите ответ пользователю"
+msgstr "Write response to user"
+
+#: handlers/users/support.py:43
+msgid "⚠️ У вас новое сообщение от администратора ⚠️\n"
+msgstr "⚠️ You have a new message from administrator ⚠️\n"
+
+#: handlers/users/today_plans.py:26
+msgid ""
+"\n"
+"\n"
+"<b>Выполненные задачи:</b>\n"
+msgstr ""
+"\n"
+"\n"
+"<b>Done tasks:</b>\n"
+
+#: handlers/users/today_plans.py:30
+msgid "<b>Ваши планы на сегодня:</b>\n"
+msgstr "<b>Your plans for today:</b>\n"
+
+#: handlers/users/today_plans.py:37
+msgid "Пожалуйста, введите новую задачу.."
+msgstr "Please, enter your new task..."
+
+#: handlers/users/today_plans.py:51
+msgid "Задача успешно добавлена!"
+msgstr "Task was successfully added"
+
+#: handlers/users/today_plans.py:57
+msgid "Пожалуйста, выберите выполненное задание"
+msgstr "Please, choose a task which you want to edit"
+
+#: handlers/users/today_plans.py:65
+msgid "Задание отмечено как выполненное!"
+msgstr "Task was marked as done!"
+
+#: handlers/users/today_plans.py:71
+msgid "Пожалуйста выберите задание, которое хотите удалить"
+msgstr "Please, choose a task which you want to delete"
+
+#: handlers/users/today_plans.py:79
+msgid "Задание удалено!"
+msgstr "Task was successfully deleted!"
+
+#: handlers/users/today_plans.py:85
+msgid "Пожалуйста выберите задание, которое хотите редактировать"
+msgstr "Please choose a task which you want to edit"
+
+#: handlers/users/today_plans.py:93
+msgid ""
+"Вы собираетесь изменить задание:\n"
+"<i>{task}</i>\n"
+"Пожалуйста введите изменнённое задание"
+msgstr ""
+"You are going to change a task:\n"
+"<i>{task}</i>\n"
+"Enter your changed task"
+
+#: handlers/users/today_plans.py:106
+msgid "Задание успешно изменено"
+msgstr "Task was successfully changed"
+
+#: handlers/users/week_plans.py:9
+msgid "Выберите день недели"
+msgstr "Select a day of the week"
+
+#: handlers/users/week_plans.py:27
+msgid "Понедельник"
+msgstr "Monday"
+
+#: handlers/users/week_plans.py:27
+msgid "Вторник"
+msgstr "Tuesday"
+
+#: handlers/users/week_plans.py:27
+msgid "Среду"
+msgstr "Wednesday"
+
+#: handlers/users/week_plans.py:27
+msgid "Четверг"
+msgstr "Thursday"
+
+#: handlers/users/week_plans.py:27
+msgid "Пятницу"
+msgstr "Friday"
+
+#: handlers/users/week_plans.py:27
+msgid "Суботу"
+msgstr "Saturday"
+
+#: handlers/users/week_plans.py:27
+msgid "Воскресенье"
+msgstr "Sunday"
+
+#: handlers/users/week_plans.py:28
+msgid "<b>Ваши планы на {day}:</b>\n"
+msgstr "<b>Your plan for {day}:</b>\n"
+
+#: keyboards/default/menu.py:10
+msgid "Планы на сегодня 📝"
+msgstr "Plans for today 📝"
+
+#: keyboards/default/menu.py:11
+msgid "Планы на неделю 📝"
+msgstr "Plans for week 📝"
+
+#: keyboards/default/menu.py:14
+msgid "Обратная связь 📲"
+msgstr "Support 📲"
+
+#: keyboards/default/menu.py:15
+msgid "Настройки ⚙️"
+msgstr "Settings ⚙️"
+
+#: keyboards/inline/inline_tasks.py:17
+msgid "Добавить задачу 📝"
+msgstr "Add a task 📝"
+
+#: keyboards/inline/inline_tasks.py:21
+msgid "Сделано 👌"
+msgstr "Done 👌"
+
+#: keyboards/inline/inline_tasks.py:22
+msgid "Редактировать ✏️"
+msgstr "Edit ✏️"
+
+#: keyboards/inline/inline_tasks.py:25
+msgid "Удалить 🗑️"
+msgstr "Delete 🗑️"
+
+#: keyboards/inline/inline_tasks.py:26
+msgid "Закрыть 🚪"
+msgstr "Close 🚪"
+
+#: keyboards/inline/inline_tasks.py:46
+msgid "Пн"
+msgstr "Mon"
+
+#: keyboards/inline/inline_tasks.py:46
+msgid "Вт"
+msgstr "Tue"
+
+#: keyboards/inline/inline_tasks.py:46
+msgid "Ср"
+msgstr "Wed"
+
+#: keyboards/inline/inline_tasks.py:46
+msgid "Чт️"
+msgstr "Thu"
+
+#: keyboards/inline/inline_tasks.py:46
+msgid "Пт"
+msgstr "Fri"
+
+#: keyboards/inline/inline_tasks.py:46
+msgid "Сб"
+msgstr "Sat"
+
+#: keyboards/inline/inline_tasks.py:46
+msgid "Вс"
+msgstr "Sun"
+
+#: keyboards/inline/inline_tasks.py:72
+msgid "Ответить"
+msgstr "Answer"
+
+#: keyboards/inline/inline_tasks.py:74
+msgid "Игнорировать"
+msgstr "Ignore"
+
+#: keyboards/inline/inline_tasks.py:81
+msgid "Выключить уведомления 🔕"
+msgstr "Disable notifications 🔕"
+
+#: keyboards/inline/inline_tasks.py:83
+msgid "Включить уведомления 🔔"
+msgstr "Enable notifications 🔔"
+
+#: keyboards/inline/inline_tasks.py:86
+msgid "Изменить язык 🌍"
+msgstr "Change language 🌍"
+
+#: keyboards/inline/inline_tasks.py:87 keyboards/inline/inline_tasks.py:106
+msgid "Отмена"
+msgstr "Cancel"
+
+#: keyboards/inline/inline_tasks.py:99
+msgid "Назад"
+msgstr "Return"
+
+#: utils/misc/scheduled_jobs.py:26
+msgid ""
+"👋 Доброе утро. Новый день - новые возможности! Следуйте своему плану и не"
+" забывайте добавлять задачи, чтобы повысить свою продуктивность! Хорошего"
+" дня и удачи 🌟"
+msgstr ""
+"👋 Hi! New day - new opportunities! Follow your plan and don't forget to "
+"add tasks to increase your productivity! Have a nice day and good luck 🌟"
+
+#: utils/misc/scheduled_jobs.py:32
+msgid ""
+"👋 Доброе утро. Новый день - новые возможности! Вы ещё не добавили задач "
+"на сегодня 🙁, сделайте это, чтобы повысить продуктивность! Хорошего дня и"
+" удачи 🌟"
+msgstr ""
+"👋 Hi! New day - new opportunities! Yoy haven't added tasks for today "
+"yet🙁, do it right now to increase your productivity! Have a nice day and "
+"good luck 🌟"
+
+#: utils/misc/scheduled_jobs.py:40
+msgid ""
+"👋 День подходит к концу. Не забудьте выставить цели на завтра! Удачи в "
+"достижении твоей цели, каждый шаг - это успех 🌟"
+msgstr ""
+"👋 Day is coming to the end. Don't forget to add new tasks for tomorrow! "
+"Good luck in achieving your goal, every step - is success 🌟"
+
