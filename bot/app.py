@@ -24,6 +24,7 @@ async def on_startup(dispatcher: Dispatcher):
     handlers.users.setup(dp)
 
     await database.on_startup(dp)
+
     await db.gino.create_all()
 
     scheduled_jobs.setup(scheduler, dp)

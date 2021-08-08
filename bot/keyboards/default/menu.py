@@ -1,18 +1,18 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from utils.db_api import db_func as db
-from bot.reqi import _
+from bot.reqi import _l
 
 
-async def main_menu(lang=None) -> ReplyKeyboardMarkup:
+async def main_menu(lang) -> ReplyKeyboardMarkup:
     keyboard = [
         [
-            KeyboardButton(text=_("Планы на сегодня 📝"), locale=lang),
-            KeyboardButton(text=_("Планы на неделю 📝"), locale=lang),
+            KeyboardButton(text=_l("Планы на сегодня 📝", locale=lang)),
+            KeyboardButton(text=_l("Планы на неделю 📝", locale=lang)),
         ],
         [
-            KeyboardButton(text=_("Обратная связь 📲"), locale=lang),
-            KeyboardButton(text=_("Настройки ⚙️"), locale=lang)
+            KeyboardButton(text=_l("Обратная связь 📲", locale=lang)),
+            KeyboardButton(text=_l("Настройки ⚙️", locale=lang))
         ]
     ]
     kb = ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)

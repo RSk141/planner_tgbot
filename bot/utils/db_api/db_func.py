@@ -61,7 +61,7 @@ async def change_notif(user_id: int):
     await User.update.values(notif=notif).where(User.user_id == user_id).gino.status()
 
 
-async def get_lang(user_id: int) -> str:
+async def get_lang(user_id) -> str:
     return await User.select('language').where(User.user_id == user_id).gino.scalar()
 
 

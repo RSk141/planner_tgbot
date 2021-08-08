@@ -1,6 +1,7 @@
 from typing import Union
 from aiogram import types
 
+
 from bot.keyboards.default.menu import main_menu
 from bot.keyboards.inline.inline_tasks import settings_kb, lang
 from utils.db_api import db_func as db
@@ -36,4 +37,4 @@ async def change_lang(call: types.CallbackQuery):
     lang = call.data[-2:]
     await db.change_lang(call.from_user.id, lang)
     await call.message.delete()
-    await call.message.answer(_('Язык успешно именен!'), reply_markup=await main_menu(lang))
+    await call.message.answer(_('Язык успешно именен!', locale=lang), reply_markup=await main_menu(lang))
