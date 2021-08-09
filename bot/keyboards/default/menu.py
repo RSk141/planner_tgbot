@@ -1,7 +1,7 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from utils.db_api import db_func as db
-from bot.reqi import _l
+from localization import _l
 
 
 async def main_menu(lang) -> ReplyKeyboardMarkup:

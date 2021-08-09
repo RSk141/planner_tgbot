@@ -4,7 +4,7 @@ from aiogram import Dispatcher
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from utils.db_api import db_func as db
-from bot.reqi import _
+from localization import _
 
 
 async def start_new_day():

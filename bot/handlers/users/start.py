@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 from utils.db_api import db_func as db
 
 from keyboards.default.menu import main_menu
-from bot.reqi import _
+from localization import _
 
 
 async def bot_start(message: types.Message):

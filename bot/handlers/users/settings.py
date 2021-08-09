@@ -1,21 +1,15 @@
 from typing import Union
 from aiogram import types
 
-
-from bot.keyboards.default.menu import main_menu
-from bot.keyboards.inline.inline_tasks import settings_kb, lang
+from keyboards.default.menu import main_menu
+from keyboards.inline.inline_tasks import settings_kb, lang
 from utils.db_api import db_func as db
-from bot.reqi import _
+from localization import _
 
 
 async def settings(message: Union[types.Message, types.CallbackQuery]):
     kb = await settings_kb(message.from_user.id)
-    text = _('Выберите опцию')
-    if isinstance(message, types.Message):
-        await message.answer(text, reply_markup=kb)
-    if isinstance(message, types.CallbackQuery):
-        call = message
-        await call.message.edit_text(text, reply_markup=kb)
+    await message.answer(_('Выберите опцию'), reply_markup=kb)
 
 
 async def change_notif(call: types.CallbackQuery):
@@ -29,12 +23,12 @@ async def change_notif(call: types.CallbackQuery):
 
 
 async def choose_language(call: types.CallbackQuery):
-    markup = await lang(call.from_user.id)
-    await call.message.edit_text(_('Выберите язык'), reply_markup=markup)
+    await call.message.edit_reply_markup()
+    await call.message.edit_text(_('Выберите язык'), reply_markup=await lang(call.from_user.id))
 
 
-async def change_lang(call: types.CallbackQuery):
-    lang = call.data[-2:]
+async def change_lang(call: types.CallbackQuery, callback_data: dict):
+    lang = callback_data.get('lang')
     await db.change_lang(call.from_user.id, lang)
     await call.message.delete()
     await call.message.answer(_('Язык успешно именен!', locale=lang), reply_markup=await main_menu(lang))

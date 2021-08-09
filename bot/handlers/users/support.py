@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 from data import config
 from keyboards.inline.inline_tasks import confirm_support, reply_support
 from states import states
-from bot.reqi import _
+from localization import _
 
 
 async def support(message: types.Message):

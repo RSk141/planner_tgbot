@@ -3,12 +3,13 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.callback_data import CallbackData
 
 from utils.db_api import db_func as db
-from bot.reqi import _, _l
+from localization import _, _l
 
 menu_callback = CallbackData('tasks', 'name', 'day')
 tasks_callback = CallbackData('done', 'name', 'task_id')
 day_callback = CallbackData('week_day', 'name', 'day')
 reply_support_callback = CallbackData('support', 'name', 'user_id')
+lang_callback = CallbackData('lang', 'name', 'lang')
 
 
 async def change_tasks_kb(day: int) -> InlineKeyboardMarkup:
@@ -92,10 +93,9 @@ async def settings_kb(user_id: int) -> InlineKeyboardMarkup:
 
 async def lang(user_id: int):
     kb = InlineKeyboardMarkup()
-    kb.add(InlineKeyboardButton(text='Українська 🇺🇦', callback_data='lang_uk')).add(
-        InlineKeyboardButton(text='English 🇬🇧', callback_data='lang_en')).add(
-        InlineKeyboardButton(text='Русский 🇷🇺',
-                             callback_data='lang_ru')).add(
+    kb.add(InlineKeyboardButton(text='Українська 🇺🇦', callback_data=lang_callback.new(name='lang', lang='uk'))).add(
+        InlineKeyboardButton(text='English 🇬🇧', callback_data=lang_callback.new(name='lang', lang='en'))).add(
+        InlineKeyboardButton(text='Русский 🇷🇺', callback_data=lang_callback.new(name='lang', lang='ru'))).add(
         InlineKeyboardButton(text=_('Назад'), callback_data='back')
     )
     return kb

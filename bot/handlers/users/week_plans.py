@@ -2,7 +2,7 @@ from aiogram import types
 
 from keyboards.inline.inline_tasks import week_day_kb, change_tasks_kb
 from utils.db_api import db_func as db
-from bot.reqi import _, _l
+from localization import _, _l
 
 
 async def choose_day(message: types.Message):

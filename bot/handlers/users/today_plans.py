@@ -7,8 +7,8 @@ from keyboards.inline.inline_tasks import change_tasks_kb, choose_task_kb
 from states import states
 from utils.db_api import db_func as db
 
-from bot.keyboards.inline.inline_tasks import cancel_kb
-from bot.reqi import _, _l
+from keyboards.inline.inline_tasks import cancel_kb
+from localization import _
 
 
 async def show_plans(message: types.Message):

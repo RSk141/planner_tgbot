@@ -2,7 +2,7 @@ from typing import Tuple, Any
 from aiogram import types
 from aiogram.contrib.middlewares.i18n import I18nMiddleware
 
-from bot.utils.db_api.db_func import get_lang
+from utils.db_api.db_func import get_lang
 
 
 class Localization(I18nMiddleware):

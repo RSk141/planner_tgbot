@@ -1,5 +1,4 @@
 from aiogram import Dispatcher, types
-from aiogram.contrib.middlewares import i18n
 from aiogram.dispatcher.filters import CommandStart
 
 from handlers.users.start import bot_start, close_menu
@@ -11,10 +10,11 @@ from handlers.users.settings import settings, change_notif
 
 from states import states
 
-from keyboards.inline.inline_tasks import menu_callback, tasks_callback, day_callback, reply_support_callback
+from keyboards.inline.inline_tasks import menu_callback, tasks_callback, day_callback, reply_support_callback, \
+    lang_callback
 
-from bot.handlers.users.settings import choose_language, change_lang
-from bot.handlers.users.start import close_menu_state, close_menu
+from handlers.users.settings import choose_language, change_lang
+from handlers.users.start import close_menu_state, close_menu
 
 
 def setup(dp: Dispatcher):
@@ -49,6 +49,5 @@ def setup(dp: Dispatcher):
 
     dp.register_message_handler(settings, text=['Настройки ⚙️', 'Налаштування ⚙️', 'Settings ⚙️'])
     dp.register_callback_query_handler(change_notif, text='change_notif')
-    dp.register_callback_query_handler(change_lang, text_contains='lang_')
+    dp.register_callback_query_handler(change_lang, lang_callback.filter(name='lang'))
     dp.register_callback_query_handler(choose_language, text='change_language')
-    dp.register_callback_query_handler(settings, text='back')
