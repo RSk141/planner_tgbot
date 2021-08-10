@@ -32,9 +32,8 @@ async def show_plans(message: types.Message):
 
 
 async def start_adding_task(call: types.CallbackQuery, callback_data: dict, state: FSMContext):
-    await call.message.edit_reply_markup()
     day = callback_data.get('day')
-    await call.message.answer(_('Пожалуйста, введите новую задачу..'), reply_markup=await cancel_kb())
+    await call.message.edit_text(_('Пожалуйста, введите новую задачу..'), reply_markup=await cancel_kb())
     await states.Task.add_task.set()
     await state.update_data(user_id=call.from_user.id, day=day)
 
@@ -52,42 +51,39 @@ async def add_task(message: types.Message, state: FSMContext):
 
 
 async def choose_done(call: types.CallbackQuery, callback_data: dict):
-    await call.message.edit_reply_markup()
     day = int(callback_data.get('day'))
-    await call.message.answer(_('Пожалуйста, выберите выполненное задание'),
-                              reply_markup=await choose_task_kb(call.from_user.id, 'done', day))
+    await call.message.edit_text(_('Пожалуйста, выберите выполненное задание'),
+                                 reply_markup=await choose_task_kb(call.from_user.id, 'done', day))
 
 
 async def mark_done(call: types.CallbackQuery, callback_data: dict):
-    await call.message.edit_reply_markup()
+    await call.message.delete()
     task_id = int(callback_data.get('task_id'))
     await db.mark_done(task_id)
     await call.message.answer(_('Задание отмечено как выполненное!'))
 
 
 async def choose_del(call: types.CallbackQuery, callback_data: dict):
-    await call.message.edit_reply_markup()
     day = int(callback_data.get('day'))
-    await call.message.answer(_('Пожалуйста выберите задание, которое хотите удалить'),
-                              reply_markup=await choose_task_kb(call.from_user.id, 'delete', day))
+    await call.message.edit_text(_('Пожалуйста выберите задание, которое хотите удалить'),
+                                 reply_markup=await choose_task_kb(call.from_user.id, 'delete', day))
 
 
 async def delete_task(call: types.CallbackQuery, callback_data: dict):
-    await call.message.edit_reply_markup()
+    await call.message.delete()
     task_id = int(callback_data.get('task_id'))
     await db.delete_task(task_id)
     await call.message.answer(_('Задание удалено!'))
 
 
 async def choose_edit(call: types.CallbackQuery, callback_data: dict):
-    await call.message.edit_reply_markup()
     day = int(callback_data.get('day'))
-    await call.message.answer(_('Пожалуйста выберите задание, которое хотите редактировать'),
-                              reply_markup=await choose_task_kb(call.from_user.id, 'edit', day))
+    await call.message.edit_text(_('Пожалуйста выберите задание, которое хотите редактировать'),
+                                 reply_markup=await choose_task_kb(call.from_user.id, 'edit', day))
 
 
 async def start_editing(call: types.CallbackQuery, callback_data: dict, state: FSMContext):
-    await call.message.edit_reply_markup()
+    await call.message.delete()
     task_id = int(callback_data.get('task_id'))
     task = await db.get_task(task_id)
     await call.message.answer(_('Вы собираетесь изменить задание:\n<i>{task}</i>\n'

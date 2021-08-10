@@ -22,6 +22,7 @@ def setup(dp: Dispatcher):
 
     dp.register_callback_query_handler(close_menu, text='close', State=None)
     dp.register_callback_query_handler(close_menu_state, text='close', state='*')
+    dp.register_callback_query_handler(settings, text='back')
 
     dp.register_message_handler(show_plans, text=['Планы на сегодня 📝', 'Плани на сьогодні 📝', 'Plans for today 📝'])
 

@@ -9,7 +9,12 @@ from localization import _
 
 async def settings(message: Union[types.Message, types.CallbackQuery]):
     kb = await settings_kb(message.from_user.id)
-    await message.answer(_('Выберите опцию'), reply_markup=kb)
+    msg = _('Выберите опцию')
+    if isinstance(message, types.Message):
+        await message.answer(msg, reply_markup=kb)
+    if isinstance(message, types.CallbackQuery):
+        call = message
+        await call.message.edit_text(msg, reply_markup=kb)
 
 
 async def change_notif(call: types.CallbackQuery):
@@ -23,7 +28,6 @@ async def change_notif(call: types.CallbackQuery):
 
 
 async def choose_language(call: types.CallbackQuery):
-    await call.message.edit_reply_markup()
     await call.message.edit_text(_('Выберите язык'), reply_markup=await lang(call.from_user.id))
 
 
