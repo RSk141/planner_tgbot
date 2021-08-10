@@ -24,6 +24,6 @@ async def show_week_plans(call: types.CallbackQuery, callback_data: dict):
         done_tasks = _l("\n\n<b>Выполненные задачи:</b>\n") + "\n".join(t_done)
     else:
         done_tasks = ''
-    week = ([_('Понедельник'), _('Вторник'), _('Среду'), _('Четверг'), _('Пятницу'), _('Суботу'), _('Воскресенье')])
+    week = (_('Понедельник'), _('Вторник'), _('Среду'), _('Четверг'), _('Пятницу'), _('Суботу'), _('Воскресенье'))
     await call.message.answer(_("<b>Ваши планы на {day}:</b>\n").format(day=week[day]) + "\n".join(t) + done_tasks,
                               reply_markup=await change_tasks_kb(day))

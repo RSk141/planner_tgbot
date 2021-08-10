@@ -11,7 +11,7 @@ async def bot_start(message: types.Message):
     await message.answer(_("Здраствуйте 👋 Я помогу вам упорядочить ващи дела и создать удобный список задач!\n"
                            "Если возникли проблемы или вопросы, вы можете обратится в поддержку. Успехов в достижении "
                            "вашей цели! 🤗"),
-                         reply_markup=await main_menu())
+                         reply_markup=await main_menu(await db.get_lang(message.from_user.id)))
     await db.add_user(message.from_user.id, message.from_user.username,
                       message.from_user.full_name)
 

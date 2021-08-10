@@ -284,3 +284,10 @@ msgstr ""
 "👋 Day is coming to the end. Don't forget to add new tasks for tomorrow! "
 "Good luck in achieving your goal, every step - is success 🌟"
 
+#: keyboards/inline/inline_tasks.py:66
+msgid "Да"
+msgstr "Yes"
+
+#: keyboards/inline/inline_tasks.py:67
+msgid "Нет"
+msgstr "No"

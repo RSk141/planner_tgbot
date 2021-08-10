@@ -38,13 +38,13 @@ async def choose_task_kb(user_id: int, action: str, day: int) -> InlineKeyboardM
         if not done:
             kb.add(InlineKeyboardButton(text=task, callback_data=tasks_callback.new(name=f'{action}_task',
                                                                                     task_id=task_id)))
-    kb.add(InlineKeyboardButton(text='Отмена', callback_data='close'))
+    kb.add(InlineKeyboardButton(text=_('Отмена'), callback_data='close'))
     return kb
 
 
 async def week_day_kb(user_id: int) -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(row_width=2)
-    week = [{_("Пн"): 0}, {_("Вт"): 1}, {_("Ср"): 2}, {_("Чт️"): 3}, {_("Пт"): 4}, {_("Сб"): 5}, {_("Вс"): 6}]
+    week = ({_("Пн"): 0}, {_("Вт"): 1}, {_("Ср"): 2}, {_("Чт️"): 3}, {_("Пт"): 4}, {_("Сб"): 5}, {_("Вс"): 6})
     today = datetime.today().weekday()
     kb_week = week[today + 1:] + week[:today]
 
@@ -63,8 +63,8 @@ async def week_day_kb(user_id: int) -> InlineKeyboardMarkup:
 
 async def confirm_support() -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup()
-    kb.add(InlineKeyboardButton(text='Да', callback_data='confirm'),
-           InlineKeyboardButton(text='Нет', callback_data='close'))
+    kb.add(InlineKeyboardButton(text=_('Да'), callback_data='confirm'),
+           InlineKeyboardButton(text=_('Нет'), callback_data='close'))
     return kb
 
 
@@ -77,8 +77,7 @@ async def reply_support(user_id: int) -> InlineKeyboardMarkup:
 
 
 async def settings_kb(user_id: int) -> InlineKeyboardMarkup:
-    notif = await db.get_notif(user_id)
-    if notif:
+    if await db.get_notif(user_id):
         btn = _('Выключить уведомления 🔕')
     else:
         btn = _('Включить уведомления 🔔')
@@ -91,7 +90,7 @@ async def settings_kb(user_id: int) -> InlineKeyboardMarkup:
     return kb
 
 
-async def lang(user_id: int):
+async def lang():
     kb = InlineKeyboardMarkup()
     kb.add(InlineKeyboardButton(text='Українська 🇺🇦', callback_data=lang_callback.new(name='lang', lang='uk'))).add(
         InlineKeyboardButton(text='English 🇬🇧', callback_data=lang_callback.new(name='lang', lang='en'))).add(
