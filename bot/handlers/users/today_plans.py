@@ -17,18 +17,22 @@ async def show_plans(message: types.Message):
     t = []
     t_done = []
     for task_id, task, done in tasks:
-        if done:
-            t_done.append(f'✅ {task}')
-        else:
-            t.append(f'🚫 {task}')
+        t_done.append(f'✅ {task}') if done else t.append(f'🚫 {task}')
 
-    if len(t_done) != 0:
-        done_tasks = _("\n\n<b>Выполненные задачи:</b>\n") + "\n".join(t_done)
-    else:
-        done_tasks = ''
+    done_tasks = _("\n\n<b>Выполненные задачи:</b>\n") + "\n".join(t_done) if t_done != 0 else ''
 
     await message.answer(_("<b>Ваши планы на сегодня:</b>\n") + "\n".join(t) + done_tasks,
                          reply_markup=await change_tasks_kb(today))
+
+
+async def show_page(call: types.CallbackQuery, callback_data: dict):
+    await call.answer()
+    day = callback_data.get('day')
+    current_page = int(callback_data.get("page"))
+    markup = choose_task_kb(user_id=call.from_user.id, page=current_page, day=day)
+    await call.message.edit_reply_markup(
+        markup
+    )
 
 
 async def start_adding_task(call: types.CallbackQuery, callback_data: dict, state: FSMContext):
@@ -52,6 +56,7 @@ async def add_task(message: types.Message, state: FSMContext):
 
 async def choose_done(call: types.CallbackQuery, callback_data: dict):
     day = int(callback_data.get('day'))
+    await call.answer()
     await call.message.edit_text(_('Пожалуйста, выберите выполненное задание'),
                                  reply_markup=await choose_task_kb(call.from_user.id, 'done', day))
 

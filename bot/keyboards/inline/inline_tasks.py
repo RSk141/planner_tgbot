@@ -10,6 +10,7 @@ tasks_callback = CallbackData('done', 'name', 'task_id')
 day_callback = CallbackData('week_day', 'name', 'day')
 reply_support_callback = CallbackData('support', 'name', 'user_id')
 lang_callback = CallbackData('lang', 'name', 'lang')
+pagination_call = CallbackData('pagination', 'key', 'page')
 
 
 async def change_tasks_kb(day: int) -> InlineKeyboardMarkup:
@@ -31,15 +32,73 @@ async def change_tasks_kb(day: int) -> InlineKeyboardMarkup:
     return kb
 
 
-async def choose_task_kb(user_id: int, action: str, day: int) -> InlineKeyboardMarkup:
+async def choose_task_kb(user_id: int, day: int, action: str, page: int = 1) -> InlineKeyboardMarkup:
     tasks = await db.get_tasks(user_id, day)
-    kb = InlineKeyboardMarkup()
-    for task_id, task, done in tasks:
+    MAX_ITEMS_PER_PAGE = 3
+    key = "items"
+    markup = InlineKeyboardMarkup(row_width=3)
+    first_item_index = (page - 1) * MAX_ITEMS_PER_PAGE
+    last_item_index = page * MAX_ITEMS_PER_PAGE
+
+    sliced_array = tasks[first_item_index:last_item_index]
+    for task_id, task, done in sliced_array:
         if not done:
-            kb.add(InlineKeyboardButton(text=task, callback_data=tasks_callback.new(name=f'{action}_task',
-                                                                                    task_id=task_id)))
-    kb.add(InlineKeyboardButton(text=_('Отмена'), callback_data='close'))
-    return kb
+            markup.add(InlineKeyboardButton(text=task, callback_data=tasks_callback.new(name=f'{action}_task',
+                                                                                        task_id=task_id)))
+
+    if len(tasks) % MAX_ITEMS_PER_PAGE == 0:
+        max_page = len(tasks) // MAX_ITEMS_PER_PAGE
+    else:
+        max_page = len(tasks) // MAX_ITEMS_PER_PAGE + 1
+
+
+    pages_buttons = list()
+    first_page = 1
+    first_page_text = "<<"
+
+    pages_buttons.append(
+        InlineKeyboardButton(
+            text=first_page_text,
+            callback_data=pagination_call.new(key=key,
+                                              page=first_page)
+        )
+    )
+
+    previous_page = page - 1
+    previous_page_text = '<<'
+
+    if previous_page >= first_page:
+        pages_buttons.append(
+            InlineKeyboardButton(
+                text=previous_page_text,
+                callback_data=pagination_call.new(key=key,
+                                                  page=previous_page)
+            )
+        )
+
+    pages_buttons.append(
+        InlineKeyboardButton(
+            text=f"- {page} -",
+            callback_data=pagination_call.new(key=key,
+                                              page="current_page")
+        )
+    )
+
+    next_page = page + 1
+    next_page_text = '>>'
+
+    if next_page <= max_page:
+        pages_buttons.append(
+            InlineKeyboardButton(
+                text=next_page_text,
+                callback_data=pagination_call.new(key=key,
+                                                  page=next_page)))
+
+    if len(tasks) > 3:
+        markup.row(*pages_buttons)
+    markup.add(InlineKeyboardButton(text=_('Отмена'), callback_data='close'))
+
+    return markup
 
 
 async def week_day_kb(user_id: int) -> InlineKeyboardMarkup:
@@ -51,10 +110,7 @@ async def week_day_kb(user_id: int) -> InlineKeyboardMarkup:
     for week_d in kb_week:
         for day, num in week_d.items():
             tasks_count = len(await db.get_tasks(user_id, num))
-            if tasks_count > 0:
-                counter = f' [{tasks_count}]'
-            else:
-                counter = ''
+            counter = f' [{tasks_count}]' if tasks_count > 0 else ''
             kb.insert(
                 InlineKeyboardButton(text=day + counter, callback_data=day_callback.new(name='week_day', day=num)))
 
@@ -77,10 +133,7 @@ async def reply_support(user_id: int) -> InlineKeyboardMarkup:
 
 
 async def settings_kb(user_id: int) -> InlineKeyboardMarkup:
-    if await db.get_notif(user_id):
-        btn = _('Выключить уведомления 🔕')
-    else:
-        btn = _('Включить уведомления 🔔')
+    btn = _('Выключить уведомления 🔕') if await db.get_notif(user_id) else _('Включить уведомления 🔔')
     kb = InlineKeyboardMarkup()
     kb.add(InlineKeyboardButton(text=btn, callback_data='change_notif')).add(
         InlineKeyboardButton(text=_('Изменить язык 🌍'), callback_data='change_language')).add(

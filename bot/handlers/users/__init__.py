@@ -16,6 +16,9 @@ from keyboards.inline.inline_tasks import menu_callback, tasks_callback, day_cal
 from handlers.users.settings import choose_language, change_lang
 from handlers.users.start import close_menu_state, close_menu
 
+from bot.handlers.users.today_plans import show_page
+from bot.keyboards.inline.inline_tasks import pagination_call
+
 
 def setup(dp: Dispatcher):
     dp.register_message_handler(bot_start, CommandStart())
@@ -23,14 +26,15 @@ def setup(dp: Dispatcher):
     dp.register_callback_query_handler(close_menu, text='close', State=None)
     dp.register_callback_query_handler(close_menu_state, text='close', state='*')
     dp.register_callback_query_handler(settings, text='back')
-
+    dp.register_callback_query_handler(show_page,pagination_call.filter(key='items'))
     dp.register_message_handler(show_plans, text=['Планы на сегодня 📝', 'Плани на сьогодні 📝', 'Plans for today 📝'])
 
     dp.register_callback_query_handler(start_adding_task, menu_callback.filter(name='add_task'))
     dp.register_message_handler(add_task, state=states.Task.add_task)
 
     dp.register_callback_query_handler(choose_done, menu_callback.filter(name='done'))
-    dp.register_callback_query_handler(mark_done, tasks_callback.filter(name='done_task'))
+    dp.register_callback_query_handler(mark_done, tasks_callback.filter(name='done_task')
+                                       )
 
     dp.register_callback_query_handler(choose_del, menu_callback.filter(name='delete'))
     dp.register_callback_query_handler(delete_task, tasks_callback.filter(name='delete_task'))
